@@ -95,7 +95,7 @@ extension String {
     
     :returns: Bool
     */
-    var isEmail: Bool {
+    var isValidEmail: Bool {
         let dataDetector = NSDataDetector(types: NSTextCheckingType.Link.toRaw(), error: nil),
             firstMatch = dataDetector.firstMatchInString(self, options: NSMatchingOptions.ReportCompletion, range: NSMakeRange(0, self.length))
             
@@ -109,7 +109,7 @@ extension String {
     */
     func isTweetable() -> Bool {
         let tweetLength = 140,
-            // ???: Why multiply by 23?
+            // Each link takes 23 characters in a tweet (assuming all links are https).
             linksLength = self.getLinks().count * 23,
             remaining = tweetLength - linksLength
         
@@ -123,7 +123,7 @@ extension String {
     /**
     Gets an array of Strings for all links found in a String
     
-    :returns: [String!]
+    :returns: [String]
     */
     func getLinks() -> [String] {
         let error: NSErrorPointer = NSErrorPointer(),
