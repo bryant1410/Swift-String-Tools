@@ -67,6 +67,21 @@ extension String {
     }
     
     /**
+    Returns the script of a String
+    
+    :returns: String! returns a string representing the script of the String (e.g. Latn, Hans).
+    */
+    func detectScript() -> String! {
+        var token : dispatch_once_t = 0
+        var tagger : NSLinguisticTagger?
+        dispatch_once(&token) {
+            tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeScript], options: 0)
+        }
+        tagger?.string = self
+        return tagger?.tagAtIndex(0, scheme: NSLinguisticTagSchemeScript, tokenRange: nil, sentenceRange: nil)
+    }
+    
+    /**
     Check the text direction of a given String.
     
     NOTE: String has to be at least 4 characters, otherwise the method will return false.
@@ -78,6 +93,7 @@ extension String {
         let language = self.detectLanguage()
         return (language? == "ar" || language? == "he")
     }
+    
     
     //MARK: - Usablity & Social
     
@@ -91,11 +107,11 @@ extension String {
     }
     
     /**
-    Checks if a string is a valid email address using NSDataDetector.
+    Checks if a string is an email address using NSDataDetector.
     
     :returns: Bool
     */
-    var isValidEmail: Bool {
+    var isEmail: Bool {
         let dataDetector = NSDataDetector(types: NSTextCheckingType.Link.toRaw(), error: nil),
             firstMatch = dataDetector.firstMatchInString(self, options: NSMatchingOptions.ReportCompletion, range: NSMakeRange(0, self.length))
             
