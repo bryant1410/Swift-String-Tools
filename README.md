@@ -16,7 +16,7 @@ Function Name | Description
 ```func getLinks() -> [String] ```| Gets an array of Strings for all links found in a String.
 ```func getURLs() -> [NSURL] ```| Gets an array of URLs for all links found in a String.
 ```func getDates() -> [NSDate] ```| Gets an array of dates for all dates found in a String
-```func getHashtags() -> [String] ```| Gets an array of strings (hashtags #acme) for all links found in a String.
+```func getHashtags() -> [String] ```| Gets an array of strings (hashtags #acme) for all hashtags found in a String.
 ```func getMentions() -> [String] ```| Gets an array of strings (mentions @apple) for all mentions found in a String
 ```func containsDate() -> Bool ```| Checks if a String contains a Date in it.
 ```func containsLink() -> Bool ```| Checks if a String contains a link in it.
