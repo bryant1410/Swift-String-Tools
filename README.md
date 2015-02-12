@@ -7,8 +7,8 @@ Function Name | Description
 --------------|------------
 ```var length``` | Length of String in Swift
 ```var objclength ``` | Length of NSString, similar to ```.length``` in NSString
-```func detectLanguage() -> String! ```| Detects the language of a String.
-```func detectScript() -> String!``` | Detects the script of a String.
+```func detectLanguage() -> String? ```| Detects the language of a String.
+```func detectScript() -> String?``` | Detects the script of a String.
 ```func isRightToleft() -> Bool ```| Checks the text direction of a given String.
 ```var isEmail``` | Checks if the String is an Email.
 ```func isOnlyEmptySpacesAndNewLineCharacters() ->Bool ```| Checks that a String is only made of white spaces, and new line characters.
