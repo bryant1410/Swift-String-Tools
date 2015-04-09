@@ -39,7 +39,7 @@ extension String {
     }
     
     var objcLength: Int {
-        return self.utf16Count
+        return count(self.utf16)
     }
     
     //MARK: - Linguistics
