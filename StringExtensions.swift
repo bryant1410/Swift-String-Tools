@@ -125,7 +125,7 @@ extension String {
         if linksLength != 0 {
             return remaining < 0
         } else {
-            return !(self.utf16Count > tweetLength || self.utf16Count == 0 || self.isOnlyEmptySpacesAndNewLineCharacters())
+            return !(count(self.utf16) > tweetLength || count(self.utf16) == 0 || self.isOnlyEmptySpacesAndNewLineCharacters())
         }
     }
     
@@ -172,7 +172,7 @@ extension String {
     func getDates() -> [NSDate] {
         let error: NSErrorPointer = NSErrorPointer()
         let detector = NSDataDetector(types: NSTextCheckingType.Date.rawValue, error: error)
-        let dates = detector?.matchesInString(self, options: NSMatchingOptions.WithTransparentBounds, range: NSMakeRange(0, self.utf16Count)) .map {$0 as! NSTextCheckingResult}
+        let dates = detector?.matchesInString(self, options: NSMatchingOptions.WithTransparentBounds, range: NSMakeRange(0, count(self.utf16))) .map {$0 as! NSTextCheckingResult}
         
         return dates!.filter { date in
             return date.date != nil
@@ -188,7 +188,7 @@ extension String {
     */
     func getHashtags() -> [String]? {
         let hashtagDetector = NSRegularExpression(pattern: "#(\\w+)", options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
-        let results = hashtagDetector?.matchesInString(self, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, self.utf16Count)).map { $0 as! NSTextCheckingResult }
+        let results = hashtagDetector?.matchesInString(self, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, count(self.utf16))).map { $0 as! NSTextCheckingResult }
         
         return results?.map({
             (self as NSString).substringWithRange($0.rangeAtIndex(1))
@@ -213,7 +213,7 @@ extension String {
     */
     func getMentions() -> [String]? {
         let hashtagDetector = NSRegularExpression(pattern: "@(\\w+)", options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
-        let results = hashtagDetector?.matchesInString(self, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, self.utf16Count)).map { $0 as! NSTextCheckingResult }
+        let results = hashtagDetector?.matchesInString(self, options: NSMatchingOptions.WithoutAnchoringBounds, range: NSMakeRange(0, count(self.utf16))).map { $0 as! NSTextCheckingResult }
         
         return results?.map({
             (self as NSString).substringWithRange($0.rangeAtIndex(1))
