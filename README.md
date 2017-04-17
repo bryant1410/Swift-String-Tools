@@ -2,7 +2,7 @@
 # Swift String Tools
 A String extension that allows you to do some very awesome functions efforlessly. 
 
-###Functions
+### Functions
 Function Name | Description 
 --------------|------------
 ```var length``` | Length of String in Swift
